@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from statsmodels import api as sm
+import os
 
+os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
 
 def create_model(csv_file):
     df = pd.read_csv(csv_file)
