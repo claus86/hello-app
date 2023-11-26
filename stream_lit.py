@@ -24,6 +24,15 @@ def dalle_request(prompt, img_gen_model, img_size):
         st.error(f"Error making DALL-E API request: {e}")
         return ""
 
+def generate_pizza_image(toppings, img_gen_model):
+    if img_gen_model == 'picsum':
+        seed = "-".join(toppings) if toppings else "no topics"
+        return f"https://picsum.photos/seed/{seed}/200"
+    if img_gen_model == 'dall-e-2':
+        topping = ",".join(toppings) if toppings else "no topics"
+        prompt = f"One round pizza on a black table with toppings: {topping}"
+        return dalle_request(prompt, img_gen_model, "1024x1024")
+    return ""
 
 def create_model(csv_file):
     df = pd.read_csv(csv_file)
