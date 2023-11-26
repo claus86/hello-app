@@ -6,6 +6,25 @@ import os
 
 os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
 
+from openai import OpenAI
+
+def dalle_request(prompt, img_gen_model, img_size):
+    try:
+        client = OpenAI()
+        response = client.images.generate(
+            model=img_gen_model,
+            prompt=prompt,
+            size=img_size,
+            quality="standard",
+            n=1,
+        )
+        # response.raise_for_status()  # Raise an error for bad responses (e.g., 4xx, 5xx)
+        return response.data[0].url
+    except Exception as e:
+        st.error(f"Error making DALL-E API request: {e}")
+        return ""
+
+
 def create_model(csv_file):
     df = pd.read_csv(csv_file)
     Y = df['Relative Price']
