@@ -107,4 +107,6 @@ price = predict_price(pizza_data_record, model)
 st.header(f"price: {price:.2f} €")
 
 # generate pizza image
-st.image(generate_pizza_image(toppings, img_gen_model="picsum"), width=400)
+#st.image(generate_pizza_image(toppings, img_gen_model="picsum"), width=400)
+
+st.image(generate_pizza_image(toppings, img_gen_model="dall-e-2"), width=400)
